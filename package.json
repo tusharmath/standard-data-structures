@@ -1,0 +1,48 @@
+{
+  "author": "Tushar Mathur <tusharmath@gmail.com>",
+  "config": {
+    "commitizen": {
+      "path": "./node_modules/cz-conventional-changelog"
+    }
+  },
+  "description": "A collection of standard data-structures for node and browser",
+  "keywords": [
+    "data",
+    "structures",
+    "performance"
+  ],
+  "license": "ISC",
+  "main": "index.js",
+  "name": "collections-ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tusharmath/collections-ts.git"
+  },
+  "scripts": {
+    "create-docs": "typedoc",
+    "lint": "tslint --project .",
+    "prepublishOnly": "tsc -d",
+    "prettier": "git ls-files | grep -E '.*\\.(ts|md|json)$' | xargs prettier --write --config=.prettierrc",
+    "semantic-release": "semantic-release",
+    "test": "mocha --require=ts-node/register --watch-extensions ts test/*.ts",
+    "travis-deploy-once": "travis-deploy-once --pro"
+  },
+  "version": "0.0.0-development",
+  "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.7",
+    "@types/node": "^12.6.2",
+    "chai": "^4.2.0",
+    "cz-conventional-changelog": "^2.1.0",
+    "mocha": "^6.1.4",
+    "prettier": "^1.18.2",
+    "semantic-release": "^15.13.18",
+    "travis-deploy-once": "^5.0.11",
+    "ts-node": "^8.3.0",
+    "tslint": "^5.18.0",
+    "tslint-config-prettier": "^1.18.0",
+    "typedoc": "^0.14.2",
+    "typescript": "^3.5.3",
+    "typescript-tslint-plugin": "^0.5.4"
+  }
+}
