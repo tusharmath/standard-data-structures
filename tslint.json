@@ -23,7 +23,11 @@
         "types": true,
         "variables": true
       }
-    ]
+    ],
+    "no-magic-numbers": false,
+    "no-this-assignment": false,
+    "prefer-for-of": false,
+    "increment-decrement": false
   },
   "rulesDirectory": []
 }

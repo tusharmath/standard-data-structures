@@ -16,8 +16,13 @@ export abstract class List<A> implements ICollection<A> {
   /**
    * Creates a new [[List]] of one element
    */
-  public static of<A>(element: A): List<A> {
-    return new Cons(element, List.empty)
+  public static of<A>(...element: A[]): List<A> {
+    let result: List<A> = List.empty
+    for (let i = 0; i < element.length; i++) {
+      result = result.prepend(element[i])
+    }
+
+    return result
   }
 
   /**
@@ -36,10 +41,24 @@ export abstract class List<A> implements ICollection<A> {
   public abstract readonly tail: List<A>
 
   /**
+   * Transforms the [[List]] into a value
+   */
+  public fold<B>(seed: B, ab: (a: A, b: B) => B): B {
+    let n: List<A> = this
+    let r: B = seed
+
+    while (!n.isEmpty) {
+      r = ab(n.head, r)
+      n = n.tail
+    }
+
+    return r
+  }
+
+  /**
    * Transforms the values of the linked list
    */
   public map<B>(ab: (a: A) => B): List<B> {
-    // tslint:disable-next-line: no-this-assignment
     let n: List<A> = this
     let r: List<B> = List.empty
     while (!n.isEmpty) {
@@ -54,6 +73,13 @@ export abstract class List<A> implements ICollection<A> {
    */
   public prepend(element: A): List<A> {
     return new Cons(element, this)
+  }
+
+  /**
+   * Folds the original list into a value of the same type
+   */
+  public reduce(ab: (a: A, b: A) => A): A {
+    return this.tail.fold<A>(this.head, ab)
   }
 }
 
