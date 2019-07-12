@@ -1,7 +1,7 @@
 {
   "generator-kips": {
     "promptValues": {
-      "projectName": "collections-ts",
+      "projectName": "standard-data-structures",
       "projectDescription": "A collection of standard data-structures for node and browser",
       "keywords": "data structures performance"
     }

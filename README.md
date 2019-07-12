@@ -1,7 +1,7 @@
-# collections-ts
+# standard-data-structures
 
-[![Build Status](https://travis-ci.com/tusharmath/collections-ts.svg?branch=master)](https://travis-ci.com/tusharmath/collections-ts)
-![npm](https://img.shields.io/npm/v/collections-ts.svg)
+[![Build Status](https://travis-ci.com/tusharmath/standard-data-structures.svg?branch=master)](https://travis-ci.com/tusharmath/standard-data-structures)
+![npm](https://img.shields.io/npm/v/standard-data-structures.svg)
 
 A collection of standard data-structures for node and browser
 
@@ -9,26 +9,26 @@ A collection of standard data-structures for node and browser
 
 - [Installation](#installation)
 - [Usage](#usage)
-- [Documentation](https://tusharmath.com/collections-ts)
+- [Documentation](https://tusharmath.com/standard-data-structures)
 
 # Installation
 
 **npm:**
 
 ```bash
-npm i collections-ts --save
+npm i standard-data-structures --save
 ```
 
 **yarn:**
 
 ```bash
-yarn add collections-ts
+yarn add standard-data-structures
 ```
 
 # Usage
 
 ```ts
-import * as DS from 'collections-ts'
+import * as DS from 'standard-data-structures'
 
 const list = DS.List.of(10) // creates a singly linked list
 

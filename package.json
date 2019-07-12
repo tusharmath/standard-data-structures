@@ -13,10 +13,10 @@
   ],
   "license": "ISC",
   "main": "index.js",
-  "name": "collections-ts",
+  "name": "standard-data-structures",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tusharmath/collections-ts.git"
+    "url": "https://github.com/tusharmath/standard-data-structures.git"
   },
   "scripts": {
     "create-docs": "typedoc",
