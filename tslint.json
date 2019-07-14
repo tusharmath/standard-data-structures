@@ -14,8 +14,12 @@
       {
         "enums": true,
         "functions": true,
-        "methods": true,
-        "properties": true,
+        "methods": {
+          "privacies": ["public", "protected"]
+        },
+        "properties": {
+          "privacies": ["public", "protected"]
+        },
         "classes": true,
         "enum-members": true,
         "interfaces": true,
