@@ -3,8 +3,14 @@
  * It can also work as a min heap by inverting the `gt` parameter.
  */
 export class MaxHeap<A> {
+  /**
+   * Creates a new [[MaxHeap]] data structure.
+   */
+  public static of<A = number>(gt: (a: A, b: A) => boolean): MaxHeap<A> {
+    return new MaxHeap(gt)
+  }
   private readonly stack = new Array<A>()
-  public constructor(private readonly gt: (a: A, b: A) => boolean) {}
+  private constructor(private readonly gt: (a: A, b: A) => boolean) {}
 
   /**
    * Remove the top element from heap.

@@ -28,9 +28,9 @@ yarn add standard-data-structures
 # Usage
 
 ```ts
-import * as DS from 'standard-data-structures'
+import {immutable} from 'standard-data-structures'
 
-const list = DS.List.of(10) // creates a singly linked list
+const list = immutable.List.of(10) // creates a singly linked list
 
 list.forEach(console.log) // runs the specified function on each item of the list
 ```
