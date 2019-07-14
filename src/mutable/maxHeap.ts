@@ -6,11 +6,37 @@ export class MaxHeap<A> {
   /**
    * Creates a new [[MaxHeap]] data structure.
    */
-  public static of<A = number>(gt: (a: A, b: A) => boolean): MaxHeap<A> {
+  public static of<A>(gt: (a: A, b: A) => boolean): MaxHeap<A> {
     return new MaxHeap(gt)
   }
+
+  /**
+   * Creates a new MaxHeap that works with numbers
+   */
+  public static get numbers(): MaxHeap<number> {
+    return MaxHeap.of((a, b) => a > b)
+  }
+
   private readonly stack = new Array<A>()
   private constructor(private readonly gt: (a: A, b: A) => boolean) {}
+
+  /**
+   * Returns the size of the heap
+   */
+  public get length(): number {
+    return this.stack.length
+  }
+
+  /**
+   * Returns the top most element on the heap
+   */
+  public get peek(): A | undefined {
+    if (this.stack.length > 0) {
+      return this.stack[0]
+    }
+
+    return undefined
+  }
 
   /**
    * Remove the top element from heap.
