@@ -81,6 +81,17 @@ export abstract class List<A> implements ICollection<A> {
   public reduce(ab: (a: A, b: A) => A): A {
     return this.tail.fold<A>(this.head, ab)
   }
+
+  /**
+   * Converts a list into an Array
+   */
+  public get asArray(): A[] {
+    return this.fold<A[]>([], (a, b) => {
+      b.push(a)
+
+      return b
+    })
+  }
 }
 
 /**
