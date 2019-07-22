@@ -16,6 +16,18 @@ describe('DoublyLinkedList', () => {
       assert.strictEqual(q.length, 4)
     })
   })
+
+  describe('isEmpty', () => {
+    it('should return true', () => {
+      const Q = DoublyLinkedList.of<number>()
+      assert.ok(Q.isEmpty)
+    })
+
+    it('should return false', () => {
+      const Q = DoublyLinkedList.of<number>(1, 2, 3)
+      assert.ok(!Q.isEmpty)
+    })
+  })
   describe('remove()', () => {
     context('when is non empty', () => {
       it('should remove the first element', () => {

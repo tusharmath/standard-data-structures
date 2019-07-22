@@ -95,6 +95,13 @@ export class DoublyLinkedList<T> implements ICollection<T> {
   }
 
   /**
+   * Returns true if the list is empty
+   */
+  public get isEmpty(): boolean {
+    return this.length === 0
+  }
+
+  /**
    * Returns the first element of the list
    */
   public get head(): T | undefined {

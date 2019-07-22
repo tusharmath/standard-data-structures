@@ -8,6 +8,11 @@ export interface ICollection<A> {
   asArray: A[]
 
   /**
+   * Checks if the collection is empty or not. Returns true if the collection is empty.
+   */
+  isEmpty: boolean
+
+  /**
    * Converts a collection into a value
    */
   fold<B>(seed: B, ab: (a: A, b: B) => B): B
