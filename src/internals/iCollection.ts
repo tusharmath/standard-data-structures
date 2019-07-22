@@ -16,9 +16,4 @@ export interface ICollection<A> {
    * Converts an [[ICollection]] of type `A` to an [[ICollection]] of type `B`
    */
   map<B>(ab: (a: A) => B): ICollection<B>
-
-  /**
-   * Like `fold` but does not require a seed value
-   */
-  reduce(ab: (a: A, b: A) => A): A
 }

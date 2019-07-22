@@ -1,4 +1,5 @@
 import {List} from './src/immutable/list'
+import {DoublyLinkedList} from './src/mutable/doublyLinkedList'
 import {MaxHeap} from './src/mutable/maxHeap'
 
 /**
@@ -12,5 +13,6 @@ export const immutable = {
  * Namespace for all mutable data-structures
  */
 export const mutable = {
+  DoublyLinkedList,
   MaxHeap
 }
