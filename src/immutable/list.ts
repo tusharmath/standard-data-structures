@@ -90,7 +90,7 @@ export abstract class List<A> implements ICollection<A> {
       b.push(a)
 
       return b
-    })
+    }).reverse()
   }
 }
 

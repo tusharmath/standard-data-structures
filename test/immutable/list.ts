@@ -35,4 +35,12 @@ describe('list', () => {
       assert.strictEqual(actual, expected)
     })
   })
+
+  describe('asArray', () => {
+    it('should return an array', () => {
+      const actual = List.of(1, 2, 3, 4).asArray
+      const expected = [1, 2, 3, 4]
+      assert.deepStrictEqual(actual, expected)
+    })
+  })
 })
