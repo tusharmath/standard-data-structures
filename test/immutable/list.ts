@@ -43,4 +43,12 @@ describe('list', () => {
       assert.deepStrictEqual(actual, expected)
     })
   })
+
+  describe('prepend', () => {
+    it('should add an element in the front', () => {
+      const actual = List.of(1, 2, 3, 4).prepend(0).asArray
+      const expected = [0, 1, 2, 3, 4]
+      assert.deepStrictEqual(actual, expected)
+    })
+  })
 })

@@ -14,11 +14,11 @@ export abstract class List<A> implements ICollection<A> {
   }
 
   /**
-   * Creates a new [[List]] of one element
+   * Creates a new [[List]] with the provided elements.
    */
   public static of<A>(...element: A[]): List<A> {
     let result: List<A> = List.empty
-    for (let i = 0; i < element.length; i++) {
+    for (let i = element.length - 1; i >= 0; i--) {
       result = result.prepend(element[i])
     }
 
@@ -90,7 +90,7 @@ export abstract class List<A> implements ICollection<A> {
       b.push(a)
 
       return b
-    }).reverse()
+    })
   }
 }
 
