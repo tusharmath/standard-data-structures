@@ -42,6 +42,27 @@ export class DoublyLinkedList<T> implements ICollection<T> {
   }
 
   /**
+   * Returns the first element of the list
+   */
+  public get head(): T | undefined {
+    return this.headN === undefined ? undefined : this.headN.value
+  }
+
+  /**
+   * Returns true if the list is empty
+   */
+  public get isEmpty(): boolean {
+    return this.length === 0
+  }
+
+  /**
+   * Returns the last element in the list
+   */
+  public get tail(): T | undefined {
+    return this.tailN === undefined ? undefined : this.tailN.value
+  }
+
+  /**
    * Creates a new DoublyLinkedList with the provided values.
    */
   public static of<A = never>(...t: A[]): DoublyLinkedList<A> {
@@ -81,6 +102,13 @@ export class DoublyLinkedList<T> implements ICollection<T> {
   }
 
   /**
+   * Cleans removes all the elements from the list
+   */
+  public empty(): void {
+    this.headN = this.tailN = undefined
+  }
+
+  /**
    * Converts the linked list into a value
    */
   public fold<C>(seed: C, f: (value: T, seed: C) => C): C {
@@ -92,20 +120,6 @@ export class DoublyLinkedList<T> implements ICollection<T> {
     }
 
     return result
-  }
-
-  /**
-   * Returns true if the list is empty
-   */
-  public get isEmpty(): boolean {
-    return this.length === 0
-  }
-
-  /**
-   * Returns the first element of the list
-   */
-  public get head(): T | undefined {
-    return this.headN === undefined ? undefined : this.headN.value
   }
 
   /**
@@ -163,12 +177,5 @@ export class DoublyLinkedList<T> implements ICollection<T> {
 
       return h.value
     }
-  }
-
-  /**
-   * Returns the last element in the list
-   */
-  public get tail(): T | undefined {
-    return this.tailN === undefined ? undefined : this.tailN.value
   }
 }
