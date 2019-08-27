@@ -105,6 +105,7 @@ export class DoublyLinkedList<T> implements ICollection<T> {
    * Cleans removes all the elements from the list
    */
   public empty(): void {
+    this.length = 0
     this.headN = this.tailN = undefined
   }
 
