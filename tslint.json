@@ -31,7 +31,8 @@
     "no-magic-numbers": false,
     "no-this-assignment": false,
     "prefer-for-of": false,
-    "increment-decrement": false
+    "increment-decrement": false,
+    "invalid-void": false
   },
   "rulesDirectory": []
 }
