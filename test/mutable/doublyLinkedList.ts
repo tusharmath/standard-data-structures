@@ -90,6 +90,16 @@ describe('DoublyLinkedList', () => {
         assert.strictEqual(q.length, 0)
       })
     })
+    context('when a disconnected node is passed', () => {
+      it('should skip', () => {
+        const q = DoublyLinkedList.of<number>()
+        const X = q.add(0)
+        q.add(1)
+        q.remove(X)
+        q.remove(X)
+        assert.strictEqual(q.length, 1)
+      })
+    })
   })
   describe('forEach()', () => {
     it('should iterate over the list ', () => {

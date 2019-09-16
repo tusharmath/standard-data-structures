@@ -124,6 +124,17 @@ export class DoublyLinkedList<T> implements ICollection<T> {
   }
 
   /**
+   * Tests if the provided node is a part of the list or not in O(n) time complexity.
+   */
+  public isConnected(n: LinkedListNode<T>): boolean {
+    return (
+      n === this.headN ||
+      ((n.left !== undefined && n.left.right === n) ||
+        (n.right !== undefined && n.right.left === n))
+    )
+  }
+
+  /**
    * Transforms the values inside the list using the transformer function, creating a new list.
    */
   public map<B>(ab: (a: T) => B): ICollection<B> {
@@ -150,6 +161,10 @@ export class DoublyLinkedList<T> implements ICollection<T> {
    * Removes the provided node from the list.
    */
   public remove(n: LinkedListNode<T>): void {
+    if (!this.isConnected(n)) {
+      return
+    }
+
     if (n.left !== undefined && n.right !== undefined) {
       n.left.right = n.right
       n.right.left = n.left
@@ -163,6 +178,7 @@ export class DoublyLinkedList<T> implements ICollection<T> {
       this.tailN = undefined
       this.headN = undefined
     }
+
     if (this.length > 0) {
       this.length -= 1
     }
