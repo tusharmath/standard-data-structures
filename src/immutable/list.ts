@@ -9,7 +9,7 @@ export abstract class List<A> implements ICollection<A> {
   /**
    * Creates an empty [[List]]
    */
-  public static get empty(): List<never> {
+  public static empty<A>(): List<A> {
     return new Empty()
   }
 
@@ -17,7 +17,7 @@ export abstract class List<A> implements ICollection<A> {
    * Creates a new [[List]] with the provided elements.
    */
   public static of<A>(...element: A[]): List<A> {
-    let result: List<A> = List.empty
+    let result: List<A> = List.empty()
     for (let i = element.length - 1; i >= 0; i--) {
       result = result.prepend(element[i])
     }
@@ -60,7 +60,7 @@ export abstract class List<A> implements ICollection<A> {
    */
   public map<B>(ab: (a: A) => B): List<B> {
     let n: List<A> = this
-    let r: List<B> = List.empty
+    let r: List<B> = List.empty()
     while (!n.isEmpty) {
       r = r.prepend(ab(n.head))
       n = n.tail
