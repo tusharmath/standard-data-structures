@@ -205,3 +205,8 @@ class Neither extends Either<never, never> {
     return right
   }
 }
+
+/**
+ * Alias to Either<never, A>
+ */
+export type Option<A> = Either<never, A>

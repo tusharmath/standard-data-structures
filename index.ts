@@ -1,4 +1,4 @@
-export {Either} from './src/immutable/either'
+export {Either, Option} from './src/immutable/either'
 export {List} from './src/immutable/list'
 export {DoublyLinkedList} from './src/mutable/doublyLinkedList'
 export {MaxHeap} from './src/mutable/maxHeap'
