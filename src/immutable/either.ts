@@ -2,7 +2,11 @@
  * Created by tushar on 07/09/19
  */
 
-/* tslint:disable completed-docs no-use-before-declare prefer-function-over-method */
+/* tslint:disable no-use-before-declare prefer-function-over-method */
+
+import {NoSuchValueException} from '../internals/noSuchValueException'
+
+import {Option} from './option'
 
 /**
  * A data structure that represents Success/Failure & optional types
@@ -10,6 +14,22 @@
  * @typeparam R1 Represents Right case that can be used to depict success.
  */
 export abstract class Either<L1, R1> {
+  /**
+   * Creates an [[Either]] from [[Option]]
+   */
+  public static fromOption<R>(
+    option: Option<R>
+  ): Either<NoSuchValueException, R> {
+    return option.asEither
+  }
+
+  /**
+   * Converts an [[Either]] to an [[Option]]
+   */
+  public get asOption(): Option<R1> {
+    return this.fold(Option.none(), L => Option.none(), R => Option.some(R))
+  }
+
   /**
    * Creates an object of [[Left]] type.
    */
@@ -130,6 +150,9 @@ export class Left<L1> extends Either<L1, never> {
     super()
   }
 
+  /**
+   * Refer [[Either.biChain]]
+   */
   public biChain<L2, R2>(
     LL: (l: L1) => Either<L2, R2>,
     RR: (r: never) => Either<L2, R2>
@@ -137,14 +160,23 @@ export class Left<L1> extends Either<L1, never> {
     return LL(this.left)
   }
 
+  /**
+   * Refer [[Either.fold]]
+   */
   public fold<S>(S: S, LL: (l: L1, s: S) => S, RR: (r: never, s: S) => S): S {
     return LL(this.left, S)
   }
 
+  /**
+   * Refer [[Either.getLeftOrElse]]
+   */
   public getLeftOrElse(left: L1): L1 {
     return this.left
   }
 
+  /**
+   * Refer [[Either.getRightOrElse]]
+   */
   public getRightOrElse(right: never): never {
     return right
   }
@@ -158,6 +190,9 @@ export class Right<R1> extends Either<never, R1> {
     super()
   }
 
+  /**
+   * Refer [[Either.biChain]]
+   */
   public biChain<L2, R2>(
     LL: (l: never) => Either<L2, R2>,
     RR: (r: R1) => Either<L2, R2>
@@ -165,14 +200,23 @@ export class Right<R1> extends Either<never, R1> {
     return RR(this.right)
   }
 
+  /**
+   * Refer [[Either.fold]]
+   */
   public fold<S>(S: S, LL: (l: never, s: S) => S, RR: (r: R1, s: S) => S): S {
     return RR(this.right, S)
   }
 
+  /**
+   * Refer [[Either.getLeftOrElse]]
+   */
   public getLeftOrElse(left: never): never {
     return left
   }
 
+  /**
+   * Refer [[Either.getRightOrElse]]
+   */
   public getRightOrElse(right: R1): R1 {
     return this.right
   }
@@ -182,6 +226,9 @@ export class Right<R1> extends Either<never, R1> {
  * Data structure that represents that its neither Left nor Right.
  */
 export class Neither extends Either<never, never> {
+  /**
+   * Refer [[Either.biChain]]
+   */
   public biChain<L2, R2>(
     LL: (l: never) => Either<L2, R2>,
     RR: (r: never) => Either<L2, R2>
@@ -189,6 +236,9 @@ export class Neither extends Either<never, never> {
     return this
   }
 
+  /**
+   * Refer [[Either.fold]]
+   */
   public fold<S>(
     S: S,
     LL: (l: never, s: S) => S,
@@ -197,10 +247,16 @@ export class Neither extends Either<never, never> {
     return S
   }
 
+  /**
+   * Refer [[Either.getLeftOrElse]]
+   */
   public getLeftOrElse(left: never): never {
     return left
   }
 
+  /**
+   * Refer [[Either.getRightOrElse]]
+   */
   public getRightOrElse(right: never): never {
     return right
   }
