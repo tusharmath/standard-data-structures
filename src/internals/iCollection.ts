@@ -13,6 +13,11 @@ export interface ICollection<A> {
   isEmpty: boolean
 
   /**
+   * Filters out the values from the collection based on the passed predicate
+   */
+  filter(F: (A: A) => boolean): ICollection<A>
+
+  /**
    * Converts a collection into a value
    */
   fold<B>(seed: B, ab: (a: A, b: B) => B): B

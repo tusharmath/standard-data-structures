@@ -51,4 +51,12 @@ describe('list', () => {
       assert.deepStrictEqual(actual, expected)
     })
   })
+
+  describe('filter', () => {
+    it('should filter out matching elements', () => {
+      const actual = List.of(1, 2, 3, 4).filter(_ => _ % 2 === 0).asArray
+      const expected = [2, 4]
+      assert.deepStrictEqual(actual, expected)
+    })
+  })
 })

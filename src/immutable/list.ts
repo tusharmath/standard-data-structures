@@ -7,6 +7,16 @@ import {ICollection} from '../internals/iCollection'
  */
 export abstract class List<A> implements ICollection<A> {
   /**
+   * Converts a list into an Array
+   */
+  public get asArray(): A[] {
+    return this.fold<A[]>([], (a, b) => {
+      b.push(a)
+
+      return b
+    })
+  }
+  /**
    * Creates an empty [[List]]
    */
   public static empty<A>(): List<A> {
@@ -39,6 +49,20 @@ export abstract class List<A> implements ICollection<A> {
    * Returns the complete list without the first element
    */
   public abstract readonly tail: List<A>
+
+  /**
+   * Refer [[ICollection.filter]]
+   */
+  public filter(F: (A: A) => boolean): List<A> {
+    return this.reverse.fold(List.empty(), (a, l) => (F(a) ? l.prepend(a) : l))
+  }
+
+  /**
+   * Reverses the List.
+   */
+  public get reverse(): List<A> {
+    return this.fold(List.empty(), (a, l) => l.prepend(a))
+  }
 
   /**
    * Transforms the [[List]] into a value
@@ -80,17 +104,6 @@ export abstract class List<A> implements ICollection<A> {
    */
   public reduce(ab: (a: A, b: A) => A): A {
     return this.tail.fold<A>(this.head, ab)
-  }
-
-  /**
-   * Converts a list into an Array
-   */
-  public get asArray(): A[] {
-    return this.fold<A[]>([], (a, b) => {
-      b.push(a)
-
-      return b
-    })
   }
 }
 

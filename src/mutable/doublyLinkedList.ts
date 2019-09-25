@@ -110,6 +110,21 @@ export class DoublyLinkedList<T> implements ICollection<T> {
   }
 
   /**
+   * Refer [[ICollection.filter]]
+   */
+  public filter(F: (A: T) => boolean): ICollection<T> {
+    const elm = DoublyLinkedList.of<T>()
+
+    this.fold(true, A => {
+      elm.add(A)
+
+      return false
+    })
+
+    return elm
+  }
+
+  /**
    * Converts the linked list into a value
    */
   public fold<C>(seed: C, f: (value: T, seed: C) => C): C {
