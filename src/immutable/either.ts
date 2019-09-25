@@ -125,7 +125,7 @@ export abstract class Either<L1, R1> {
 /**
  * Data structure that represents a left value
  */
-class Left<L1> extends Either<L1, never> {
+export class Left<L1> extends Either<L1, never> {
   public constructor(public readonly left: L1) {
     super()
   }
@@ -153,7 +153,7 @@ class Left<L1> extends Either<L1, never> {
 /**
  * Data structure that represents a right value
  */
-class Right<R1> extends Either<never, R1> {
+export class Right<R1> extends Either<never, R1> {
   public constructor(public readonly right: R1) {
     super()
   }
@@ -181,7 +181,7 @@ class Right<R1> extends Either<never, R1> {
 /**
  * Data structure that represents that its neither Left nor Right.
  */
-class Neither extends Either<never, never> {
+export class Neither extends Either<never, never> {
   public biChain<L2, R2>(
     LL: (l: never) => Either<L2, R2>,
     RR: (r: never) => Either<L2, R2>
@@ -205,8 +205,3 @@ class Neither extends Either<never, never> {
     return right
   }
 }
-
-/**
- * Alias to Either<never, A>
- */
-export type Option<A> = Either<never, A>
