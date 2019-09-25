@@ -7,12 +7,15 @@ import {Option} from './option'
  */
 export class HashMap<K, V> {
   /**
-   * Gives a new instance of HashMap
-   * @param dict Map
+   * Creates a new instance of [[HashMap]]
    */
-  public static of<Key, Val>(dict: Map<Key, Val>): HashMap<Key, Val> {
-    return new HashMap(dict)
+
+  public static of<K, V>(
+    entries?: ReadonlyArray<readonly [K, V]>
+  ): HashMap<K, V> {
+    return new HashMap(new Map(entries))
   }
+
   private constructor(private readonly dict: Map<K, V>) {}
 
   /**
