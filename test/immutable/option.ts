@@ -1,5 +1,6 @@
 import {assert} from 'chai'
 
+import {Either} from '../../src/immutable/either'
 import {None, Option, Some} from '../../src/immutable/option'
 
 describe('option', () => {
@@ -52,6 +53,16 @@ describe('option', () => {
 
     it('should return false', () => {
       assert.isFalse(Option.isNone(Option.some(0)))
+    })
+  })
+
+  describe('Option.fromEither', () => {
+    it('should return Some', () => {
+      assert.instanceOf(Option.fromEither(Either.right(10)), Some)
+    })
+
+    it('should return None', () => {
+      assert.instanceOf(Option.fromEither(Either.left(10)), None)
     })
   })
 })

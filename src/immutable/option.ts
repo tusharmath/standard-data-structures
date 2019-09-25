@@ -1,9 +1,26 @@
 /* tslint:disable no-use-before-declare prefer-function-over-method */
+import {NoSuchValueException} from '../internals/noSuchValueException'
+
+import {Either} from './either'
 
 /**
  * Used to represent an optional value
  */
 export abstract class Option<A> {
+  /**
+   * Returns `true` if the instance is [[Some]]
+   */
+  public get isSome(): boolean {
+    return !this.isNone
+  }
+
+  /**
+   * Creates an [[Option]] from an [[Either]]
+   */
+  public static fromEither<L, R>(either: Either<L, R>): Option<R> {
+    return either.fold(Option.none(), () => Option.none(), Option.some)
+  }
+
   /**
    * Checks if the Option type is of [[None]] type
    */
@@ -33,16 +50,14 @@ export abstract class Option<A> {
   }
 
   /**
+   * Converts an [[Option]] to an [[Either]]
+   */
+  public abstract asEither: Either<NoSuchValueException, A>
+
+  /**
    * Returns `true` if the instance is [[None]]
    */
   public abstract isNone: boolean
-
-  /**
-   * Returns `true` if the instance is [[Some]]
-   */
-  public get isSome(): boolean {
-    return !this.isNone
-  }
 
   /**
    * Flattens the [[Option]] type
@@ -105,6 +120,13 @@ export class Some<A> extends Option<A> {
   public get isNone(): boolean {
     return false
   }
+
+  /**
+   * Refer [[Option.asEither]]
+   */
+  public get asEither(): Either<NoSuchValueException, A> {
+    return Either.right(this.value)
+  }
 }
 
 /**
@@ -137,5 +159,12 @@ export class None extends Option<never> {
    */
   public get isNone(): boolean {
     return true
+  }
+
+  /**
+   * Refer [[Option.asEither]]
+   */
+  public get asEither(): Either<NoSuchValueException, never> {
+    return Either.left(new NoSuchValueException())
   }
 }
