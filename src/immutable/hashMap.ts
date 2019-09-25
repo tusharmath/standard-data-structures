@@ -6,6 +6,13 @@ import {Option} from './option'
  * An immutable HashMap
  */
 export class HashMap<K, V> {
+  /**
+   * Gives a new instance of HashMap
+   * @param dict Map
+   */
+  public static of<Key, Val>(dict: Map<Key, Val>): HashMap<Key, Val> {
+    return new HashMap(dict)
+  }
   private constructor(private readonly dict: Map<K, V>) {}
 
   /**
