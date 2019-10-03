@@ -15,6 +15,12 @@ import {Option} from './option'
  */
 export abstract class Either<L1, R1> {
   /**
+   * Converts an [[Either]] to an [[Option]]
+   */
+  public get asOption(): Option<R1> {
+    return this.fold(Option.none(), L => Option.none(), R => Option.some(R))
+  }
+  /**
    * Creates an [[Either]] from [[Option]]
    */
   public static fromOption<R>(
