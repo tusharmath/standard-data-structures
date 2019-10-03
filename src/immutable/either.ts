@@ -30,10 +30,17 @@ export abstract class Either<L1, R1> {
   }
 
   /**
-   * Converts an [[Either]] to an [[Option]]
+   * Returns true if the either is of [[Left]] type.
    */
-  public get asOption(): Option<R1> {
-    return this.fold(Option.none(), L => Option.none(), R => Option.some(R))
+  public static isLeft<L1, R1>(either: Either<L1, R1>): either is Left<L1> {
+    return either instanceof Left
+  }
+
+  /**
+   * Returns true if the either is of [[Right]] type.
+   */
+  public static isRight<L1, R1>(either: Either<L1, R1>): either is Right<R1> {
+    return either instanceof Right
   }
 
   /**
