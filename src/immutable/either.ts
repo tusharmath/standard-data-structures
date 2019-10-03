@@ -159,7 +159,7 @@ export abstract class Either<L1, R1> {
  * Data structure that represents a left value
  */
 export class Left<L1> extends Either<L1, never> {
-  public constructor(public readonly left: L1) {
+  public constructor(public readonly value: L1) {
     super()
   }
 
@@ -170,21 +170,21 @@ export class Left<L1> extends Either<L1, never> {
     LL: (l: L1) => Either<L2, R2>,
     RR: (r: never) => Either<L2, R2>
   ): Either<L2, R2> {
-    return LL(this.left)
+    return LL(this.value)
   }
 
   /**
    * Refer [[Either.fold]]
    */
   public fold<S>(S: S, LL: (l: L1, s: S) => S, RR: (r: never, s: S) => S): S {
-    return LL(this.left, S)
+    return LL(this.value, S)
   }
 
   /**
    * Refer [[Either.getLeftOrElse]]
    */
   public getLeftOrElse(left: L1): L1 {
-    return this.left
+    return this.value
   }
 
   /**
@@ -199,7 +199,7 @@ export class Left<L1> extends Either<L1, never> {
  * Data structure that represents a right value
  */
 export class Right<R1> extends Either<never, R1> {
-  public constructor(public readonly right: R1) {
+  public constructor(public readonly value: R1) {
     super()
   }
 
@@ -210,14 +210,14 @@ export class Right<R1> extends Either<never, R1> {
     LL: (l: never) => Either<L2, R2>,
     RR: (r: R1) => Either<L2, R2>
   ): Either<L2, R2> {
-    return RR(this.right)
+    return RR(this.value)
   }
 
   /**
    * Refer [[Either.fold]]
    */
   public fold<S>(S: S, LL: (l: never, s: S) => S, RR: (r: R1, s: S) => S): S {
-    return RR(this.right, S)
+    return RR(this.value, S)
   }
 
   /**
@@ -231,7 +231,7 @@ export class Right<R1> extends Either<never, R1> {
    * Refer [[Either.getRightOrElse]]
    */
   public getRightOrElse(right: R1): R1 {
-    return this.right
+    return this.value
   }
 }
 
