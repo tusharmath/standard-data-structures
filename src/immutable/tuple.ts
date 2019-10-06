@@ -4,7 +4,14 @@ import {id} from '../internals/id'
  * A tuple data-structure that can carry two values viz _0 and _1.
  */
 export class Tuple<A0, A1> {
-  public constructor(public readonly _0: A0, public readonly _1: A1) {}
+  /**
+   * Creates a new instance of [[Tuple]]
+   */
+  public static of<A0, A1>(_0: A0, _1: A1): Tuple<A0, A1> {
+    return new Tuple(_0, _1)
+  }
+
+  private constructor(public readonly _0: A0, public readonly _1: A1) {}
 
   /**
    * Maps over both the first and the second value.
