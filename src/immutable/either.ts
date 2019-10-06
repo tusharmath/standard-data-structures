@@ -37,6 +37,13 @@ export abstract class Either<L1, R1> {
   }
 
   /**
+   * Returns true if the either is of [[Neither]] type.
+   */
+  public static isNeither<L1, R1>(either: Either<L1, R1>): either is Neither {
+    return either instanceof Neither
+  }
+
+  /**
    * Returns true if the either is of [[Right]] type.
    */
   public static isRight<L1, R1>(either: Either<L1, R1>): either is Right<R1> {
