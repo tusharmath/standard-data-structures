@@ -1,5 +1,5 @@
 export {DoublyLinkedList} from './src/mutable/doublyLinkedList'
-export {Either, Left, Right, Neither} from './src/immutable/either'
+export {Either, Left, Right} from './src/immutable/either'
 export {HashMap} from './src/immutable/hashMap'
 export {LinkedListNode} from './src/mutable/doublyLinkedList'
 export {List} from './src/immutable/list'
