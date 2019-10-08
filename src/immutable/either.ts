@@ -37,13 +37,6 @@ export abstract class Either<L1, R1> {
   }
 
   /**
-   * Returns true if the either is of [[Neither]] type.
-   */
-  public static isNeither<L1, R1>(either: Either<L1, R1>): either is Neither {
-    return either instanceof Neither
-  }
-
-  /**
    * Returns true if the either is of [[Right]] type.
    */
   public static isRight<L1, R1>(either: Either<L1, R1>): either is Right<R1> {
@@ -55,13 +48,6 @@ export abstract class Either<L1, R1> {
    */
   public static left<L>(left: L): Either<L, never> {
     return new Left(left)
-  }
-
-  /**
-   * Creates an object of [[Neither]] type.
-   */
-  public static neither(): Either<never, never> {
-    return new Neither()
   }
 
   /**
@@ -122,7 +108,7 @@ export abstract class Either<L1, R1> {
   }
 
   /**
-   * Reduces an [[Either]] to a value of type S.
+   * Reduces an [[Either]] to a value of type S by providing a seed value
    */
   public abstract fold<S>(
     seed: S,
@@ -160,6 +146,12 @@ export abstract class Either<L1, R1> {
   public mapR<R2>(ab: (r: R1) => R2): Either<L1, R2> {
     return this.chainR(r => Either.right(ab(r)))
   }
+
+  /**
+   * Reduces an [[Either]] to a value of type S by providing a seed value
+   */
+
+  public abstract reduce<S>(LL: (l: L1) => S, RR: (r: R1) => S): S
 }
 
 /**
@@ -199,6 +191,13 @@ export class Left<L1> extends Either<L1, never> {
    */
   public getRightOrElse(right: never): never {
     return right
+  }
+
+  /**
+   * Refer [[Either.reduce]]
+   */
+  public reduce<S>(LL: (l: L1) => S, RR: (r: never) => S): S {
+    return LL(this.value)
   }
 }
 
@@ -240,44 +239,11 @@ export class Right<R1> extends Either<never, R1> {
   public getRightOrElse(right: R1): R1 {
     return this.value
   }
-}
-
-/**
- * Data structure that represents that its neither Left nor Right.
- */
-export class Neither extends Either<never, never> {
-  /**
-   * Refer [[Either.biChain]]
-   */
-  public biChain<L2, R2>(
-    LL: (l: never) => Either<L2, R2>,
-    RR: (r: never) => Either<L2, R2>
-  ): Either<L2, R2> {
-    return this
-  }
 
   /**
-   * Refer [[Either.fold]]
+   * Refer [[Either.reduce]]
    */
-  public fold<S>(
-    S: S,
-    LL: (l: never, s: S) => S,
-    RR: (r: never, s: S) => S
-  ): S {
-    return S
-  }
-
-  /**
-   * Refer [[Either.getLeftOrElse]]
-   */
-  public getLeftOrElse(left: never): never {
-    return left
-  }
-
-  /**
-   * Refer [[Either.getRightOrElse]]
-   */
-  public getRightOrElse(right: never): never {
-    return right
+  public reduce<S>(LL: (l: never) => S, RR: (r: R1) => S): S {
+    return RR(this.value)
   }
 }
