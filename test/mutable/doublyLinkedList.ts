@@ -1,5 +1,6 @@
-import * as assert from 'assert'
+import {assert} from 'chai'
 
+import {Option} from '../../src/immutable/option'
 import {DoublyLinkedList} from '../../src/mutable/doublyLinkedList'
 
 describe('DoublyLinkedList', () => {
@@ -127,15 +128,15 @@ describe('DoublyLinkedList', () => {
     it('should return the head', () => {
       const q = DoublyLinkedList.of(1, 2, 3, 4, 5)
       const actual = q.shift()
-      const expected = 1
-      assert.strictEqual(actual, expected)
+      const expected = Option.some(1)
+      assert.deepStrictEqual(actual, expected)
     })
 
-    it('should return undefined', () => {
+    it('should return none', () => {
       const q = DoublyLinkedList.of<number>()
       const actual = q.shift()
-      const expected = undefined
-      assert.strictEqual(actual, expected)
+      const expected = Option.none()
+      assert.deepStrictEqual(actual, expected)
     })
   })
 
@@ -143,15 +144,15 @@ describe('DoublyLinkedList', () => {
     it('should return the head', () => {
       const q = DoublyLinkedList.of(1, 2, 3, 4, 5)
       const actual = q.pop()
-      const expected = 5
-      assert.strictEqual(actual, expected)
+      const expected = Option.some(5)
+      assert.deepStrictEqual(actual, expected)
     })
 
-    it('should return undefined', () => {
+    it('should return none', () => {
       const q = DoublyLinkedList.of<number>()
       const actual = q.pop()
-      const expected = undefined
-      assert.strictEqual(actual, expected)
+      const expected = Option.none()
+      assert.deepStrictEqual(actual, expected)
     })
   })
 })
