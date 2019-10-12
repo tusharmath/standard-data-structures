@@ -1,3 +1,4 @@
+import {Option} from '../immutable/option'
 import {ICollection} from '../internals/iCollection'
 
 /* tslint:disable strict-comparisons */
@@ -163,13 +164,15 @@ export class DoublyLinkedList<T> implements ICollection<T> {
   /**
    * Removes the last inserted element
    */
-  public pop(): T | void {
+  public pop(): Option<T> {
     const h = this.tailN
     if (h !== undefined) {
       this.remove(h)
 
-      return h.value
+      return Option.some(h.value)
     }
+
+    return Option.none()
   }
 
   /**
@@ -202,12 +205,14 @@ export class DoublyLinkedList<T> implements ICollection<T> {
   /**
    * Remove the first element from the list
    */
-  public shift(): T | void {
+  public shift(): Option<T> {
     const h = this.headN
     if (h !== undefined) {
       this.remove(h)
 
-      return h.value
+      return Option.some(h.value)
     }
+
+    return Option.none()
   }
 }
